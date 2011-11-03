@@ -1,0 +1,53 @@
+= rake-bubbler gem
+
+This gem allows capturing raketask output along with additional information (task name, duration, start time, error) while preserving old rake behavior. Such functionality can be useful for logging and monitoring purposes.
+
+Actions and prerequisites are captured as well.
+
+== Configuration
+
+Configuration should be included in Rakefile:
+
+  RakeBubbler::RakeBubbler.config do |config|
+
+    # tasks to be captured (default none)
+    config.tasks = ['db:migrate', 'upload']
+
+    config.executed = Proc.new do |task_name, duration, output, started, error|
+      puts task_name  => "example_task"
+      puts duration   => 3.0709819
+      puts output     => "Example output\n"
+      puts started    => Thu Nov 03 11:13:27 +0100 2011
+      puts error      => nil
+    end
+
+    # additional conditions required to capture data (optional)
+    config.conditions = Proc.new do
+      [true, false][rand(2)]
+    end
+
+  end  
+
+=== Executed option parameters
+
+[+task_name+] Name of the task.
+[+duration+] Real task duration with actions and prerequisites.
+[+output+] Task output captured from stdout.
+[+started+] Time when task execution began.
+[+error+] Exception captured during task execution. Nil if none.
+
+== Contributing to rake-bubbler
+ 
+* Check out the latest master to make sure the feature hasn't been implemented or the bug hasn't been fixed yet
+* Check out the issue tracker to make sure someone already hasn't requested it and/or contributed it
+* Fork the project
+* Start a feature/bugfix branch
+* Commit and push until you are happy with your contribution
+* Make sure to add tests for it. This is important so I don't break it in a future version unintentionally.
+* Please try not to mess with the Rakefile, version, or history. If you want to have your own version, or is otherwise necessary, that is fine, but please isolate to its own commit so I can cherry-pick around it.
+
+== Copyright
+
+Copyright (c) 2011 innov8on.com. See LICENSE.txt for
+further details.
+
