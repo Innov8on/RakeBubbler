@@ -27,6 +27,7 @@ Gem::Specification.new do |s|
     "lib/rake_bubbler/bubble_task.rb",
     "lib/rake_bubbler/config.rb",
     "lib/rake_bubbler/rake_bubbler.rb",
+    "rake_bubbler.gemspec",
     "test/helper.rb",
     "test/test_rake_bubbler.rb"
   ]
